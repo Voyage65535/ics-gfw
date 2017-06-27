@@ -1,0 +1,12 @@
+[Unit]
+Description=$kcptun
+Wants=shadowsocks.service
+After=shadowsocks.service
+
+[Service]
+Type=simple
+PIDFile=/run/kcptun.pid
+ExecStart=/usr/bin/kcptun_server -c /etc/ics-gfw/server-config.json
+
+[Install]
+WantedBy=multi-user.target

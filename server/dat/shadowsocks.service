@@ -1,0 +1,15 @@
+[Unit]
+Description=ShadowSocks - An socks5 proxy
+Wants=network-online.target
+After=network-online.target
+Before=kcptun.service
+
+[Service]
+Type=simple
+PIDFile=/run/shadowsocks.pid
+ExecStart=/usr/local/bin/ssserver -p 443 -k 1763986283 -m aes-256-cfb -d start
+ExecStop=/usr/local/bin/ssserver -d stop
+Restart=/usr/local/bin/ssserver -k 1763986283 -d restart
+
+[Install]
+WantedBy=multi-user.target kcptun.service
