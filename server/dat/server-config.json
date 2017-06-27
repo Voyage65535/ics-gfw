@@ -1,7 +1,7 @@
 {
     "listen": ":29900",
     "target": "127.0.0.1:443",
-    "key": "test",
+    "key": "yuyuko sama",
     "crypt": "salsa20",
     "mode": "fast2",
     "mtu": 1400,
