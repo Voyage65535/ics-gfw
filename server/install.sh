@@ -4,24 +4,27 @@ read -p 'Enter your shadowsocks and kcptun password: ' pwd
 sed -i "s/\"key\": \"\"/\"key\": \"${pwd}\"/g" dat/server-config.json
 sed -i "s/\"password\": \"\"/\"password\": \"${pwd}\"/g" dat/config.json
 
-pkgmgr=('pacman' 'emerge' 'apt-get' 'dnf' 'yum' 'zypper' 'brew')
-pkgnam='python python-pip' # PACKAGE NAME UNTESTED!!!
-for i in ${pkgmgr[@]}; do
-    hash $i >/dev/null 2>&1  
-    if [ $? == 0 ]; then
-        case $i in #Ensure the pkgname is correct in your distro, or modify it.
-	    'pacman') 
-		$i -S $pkgnam
-		;;
-	    'emerge')
-		$i $pkgnam
-		;;
-	    'apt-get' | 'dnf' | 'yum' | 'zypper' | 'brew')
-		$i install $pkgnam
-		;;
-	esac
-    fi
-done
+hash 'pip' >/dev/null 2>&1
+if [ $? != 0 ]; then
+    pkgmgr=('pacman' 'emerge' 'apt-get' 'dnf' 'yum' 'zypper' 'brew')
+    pkgnam='python python-pip' # PACKAGE NAME UNTESTED!!!
+    for i in ${pkgmgr[@]}; do
+        hash $i >/dev/null 2>&1
+        if [ $? == 0 ]; then
+            case $i in #Ensure the pkgname is correct in your distro, or modify it.
+                'pacman')
+                    $i -S $pkgnam
+                    ;;
+                'emerge')
+                    $i $pkgnam
+                    ;;
+                'apt-get' | 'dnf' | 'yum' | 'zypper' | 'brew')
+                    $i install $pkgnam
+                    ;;
+            esac
+        fi
+    done
+fi
 pip install shadowsocks
 
 kcptun_ver='20170525'
@@ -29,51 +32,51 @@ ikrnl=`uname -s`
 iarch=`uname -m`
 case $ikrnl in
     'Linux')
-	krnl='linux'
-	;;
+        krnl='linux'
+        ;;
     'FreeBSD' | 'GNU/kFreeBSD')
-	krnl='freebsd'
-	;;
+        krnl='freebsd'
+        ;;
     'Darwin')
-	krnl='darwin'
-	;;
+        krnl='darwin'
+        ;;
     *)
-	echo 'Unsupported platform!'
-	exit 1
-	;;
+        echo 'Unsupported platform!'
+        exit 1
+        ;;
 esac
 case $iarch in
     'i386' | 'i686')
-	arch='386'
-	;;
+        arch='386'
+        ;;
     'amd64' | 'x86_64')
-	arch='amd64'
-	;;
+        arch='amd64'
+        ;;
     'armv6l' | 'armv7l')
-	if [ '$krnl' != 'linux' ]; then
-	    echo 'Unsupported platform!'
-	    exit 1
-	fi
-	arch='arm'
-	;;
+        if [ '$krnl' != 'linux' ]; then
+            echo 'Unsupported platform!'
+            exit 1
+        fi
+        arch='arm'
+        ;;
     'mips')
-	if [ '$krnl' != 'linux' ]; then
-	    echo 'Unsupported platform!'
-	    exit 1
-	fi
-	arch='mips'
-	;;
+        if [ '$krnl' != 'linux' ]; then
+            echo 'Unsupported platform!'
+            exit 1
+        fi
+        arch='mips'
+        ;;
     'mipsel')
-	if [ '$krnl' != 'linux' ]; then
-	    echo 'Unsupported platform!'
-	    exit 1
-	fi
-	arch='mipsle'
-	;;
+        if [ '$krnl' != 'linux' ]; then
+            echo 'Unsupported platform!'
+            exit 1
+        fi
+        arch='mipsle'
+        ;;
     *)
-	echo 'Unsupported platform!'
-	exit 1
-	;;
+        echo 'Unsupported platform!'
+        exit 1
+        ;;
 esac
 fname=kcptun-${krnl}-${arch}-${kcptun_ver}.tar.gz
 uri=https://github.com/xtaci/kcptun/releases/download/v${kcptun_ver}/${fname}
