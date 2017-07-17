@@ -1,0 +1,15 @@
+[Unit]
+Description=ShadowSocks - An socks5 proxy
+Wants=network-online.target
+After=network-online.target
+Before=kcptun.service
+
+[Service]
+Type=simple
+PIDFile=/run/shadowsocks.pid
+ExecStart=/usr/local/bin/sslocal -c /etc/ics-gfw/config.json -d start
+ExecStop=/usr/local/bin/sslocal -d stop
+Restart=/usr/local/bin/sslocal -c /etc/ics-gfw/config.json -d restart
+
+[Install]
+WantedBy=multi-user.target kcptun.service

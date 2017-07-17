@@ -1,0 +1,23 @@
+{
+	"localaddr": "127.0.0.1:646",
+	"remoteaddr": ":29900",
+	"key": "",
+	"crypt": "aes-256",
+	"mode": "fast3",
+	"conn": 1,
+	"autoexpire": 60,
+	"mtu": 1450,
+	"sndwnd": 128,
+	"scvwnd": 1024,
+	"datashard": 70,
+	"parityshard": 30,
+	"dscp": 46,
+	"nocomp": false,
+	"acknodelay": false,
+	"nodelay": 0,
+	"interval": 40,
+	"resend": 0,
+	"nc": 0,
+	"sockbuf": 4194304,
+	"keepalive": 10
+}
