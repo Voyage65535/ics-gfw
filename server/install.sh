@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pkgmgr=('pacman' 'emerge' 'apt-get' 'yum' 'zypper' 'brew')
+pkgmgr=('pacman' 'emerge' 'apt-get' 'dnf' 'yum' 'zypper' 'brew')
 pkgnam='python python-pip' # PACKAGE NAME UNTESTED!!!
 for i in ${pkgmgr[@]}; do
     hash $i >/dev/null 2>&1  
@@ -12,7 +12,7 @@ for i in ${pkgmgr[@]}; do
 	    'emerge')
 		$i $pkgnam
 		;;
-	    'apt-get' | 'yum' | 'zypper' | 'brew')
+	    'apt-get' | 'dnf' | 'yum' | 'zypper' | 'brew')
 		$i install $pkgnam
 		;;
 	esac
@@ -69,7 +69,7 @@ case $iarch in
     *)
 	echo 'Unsupported platform!'
 	exit 1
-	
+	;;
 esac
 fname=kcptun-${krnl}-${arch}-${kcptun_ver}.tar.gz
 uri=https://github.com/xtaci/kcptun/releases/download/v${kcptun_ver}/${fname}
