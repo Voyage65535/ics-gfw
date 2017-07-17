@@ -1,5 +1,9 @@
 #!/bin/bash
 
+read -p 'Enter your shadowsocks and kcptun password: ' pwd
+sed -i "s/\"key\": \"\"/\"key\": \"${pwd}\"/g" dat/server-config.json
+sed -i "s/\"password\": \"\"/\"password\": \"${pwd}\"/g" dat/config.json
+
 pkgmgr=('pacman' 'emerge' 'apt-get' 'dnf' 'yum' 'zypper' 'brew')
 pkgnam='python python-pip' # PACKAGE NAME UNTESTED!!!
 for i in ${pkgmgr[@]}; do
@@ -80,6 +84,7 @@ mv tmp/server_${krnl}_${arch} /usr/bin/kcptun_server
 rm -r tmp $fname
 mkdir /etc/ics-gfw
 cp dat/server-config.json /etc/ics-gfw
+cp dat/config.json /etc/ics-gfw
 
 mkdir -p /usr/lib/systemd/system
 cp dat/shadowsocks.service /usr/lib/systemd/system
