@@ -7,9 +7,9 @@ Before=kcptun.service
 [Service]
 Type=simple
 PIDFile=/run/shadowsocks.pid
-ExecStart=/usr/local/bin/ssserver -c /etc/ics-gfw/config.json -d start
-ExecStop=/usr/local/bin/ssserver -d stop
-Restart=/usr/local/bin/ssserver -c /etc/ics-gfw/config.json -d restart
+ExecStart=ssserver -c /etc/ics-gfw/config.json -d start
+ExecStop=ssserver -d stop
+Restart=ssserver -c /etc/ics-gfw/config.json -d restart
 
 [Install]
 WantedBy=multi-user.target kcptun.service

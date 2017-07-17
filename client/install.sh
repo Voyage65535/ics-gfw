@@ -91,6 +91,9 @@ mkdir /etc/ics-gfw
 cp dat/client-config.json /etc/ics-gfw
 cp dat/config.json /etc/ics-gfw
 
+path=`which sslocal`
+sed -i "s/sslocal/${path}/g" dat/shadowsocks.service
+
 mkdir -p /usr/lib/systemd/system
 cp dat/shadowsocks.service /usr/lib/systemd/system
 cp dat/kcptun.service /usr/lib/systemd/system
