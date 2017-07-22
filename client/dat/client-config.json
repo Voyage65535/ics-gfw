@@ -8,7 +8,7 @@
 	"autoexpire": 60,
 	"mtu": 1450,
 	"sndwnd": 128,
-	"scvwnd": 1024,
+	"rcvwnd": 1024,
 	"datashard": 70,
 	"parityshard": 30,
 	"dscp": 46,
